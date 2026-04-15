@@ -751,12 +751,76 @@
       to   { opacity: 1; transform: translateY(0) }
     }
 
+    /* GALLERY STRIP */
+    .gallery-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      height: 320px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-item + .gallery-item {
+      border-left: 1px solid var(--border);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(25%) brightness(0.6);
+      transition: filter .5s, transform .5s;
+      display: block;
+    }
+
+    .gallery-item:hover img {
+      filter: grayscale(0%) brightness(0.8);
+      transform: scale(1.05);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(10,11,15,.85) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .gallery-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text);
+    }
+
+    .gallery-sub {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--blue-soft);
+      margin-top: .25rem;
+    }
+
     @media(max-width:680px) {
       header { padding: 1.2rem 1.5rem; }
       nav { display: none; }
       #servicios { padding: 3rem 1.5rem 4rem; }
       .nitro-section { padding: 3rem 1.5rem 5rem; }
       .steps { gap: 2rem; }
+      .gallery-strip { grid-template-columns: 1fr; height: auto; }
+      .gallery-item { height: 200px; }
+      .gallery-item + .gallery-item { border-left: none; border-top: 1px solid var(--border); }
     }
   </style>
 </head>
@@ -818,10 +882,10 @@
           <div class="card-num">Servicio 01</div>
           <div class="card-title">Aceite & Filtros</div>
           <ul class="price-list">
-            <li><span class="price-name">Cambio de aceite</span><span class="price-dur">45 min</span><span class="price-val">$9.000</span></li>
-            <li><span class="price-name">Filtro de aceite</span><span class="price-dur">15 min</span><span class="price-val">$3.500</span></li>
-            <li><span class="price-name">Filtro de aire</span><span class="price-dur">15 min</span><span class="price-val">$3.000</span></li>
-            <li><span class="price-name">Filtro de combustible</span><span class="price-dur">20 min</span><span class="price-val">$4.000</span></li>
+            <li><span class="price-name">Cambio de aceite</span><span class="price-dur">45 min</span><span class="price-val">$90.000</span></li>
+            <li><span class="price-name">Filtro de aceite</span><span class="price-dur">15 min</span><span class="price-val">$28.000</span></li>
+            <li><span class="price-name">Filtro de aire</span><span class="price-dur">15 min</span><span class="price-val">$22.000</span></li>
+            <li><span class="price-name">Filtro de combustible</span><span class="price-dur">20 min</span><span class="price-val">$30.000</span></li>
           </ul>
         </div>
 
@@ -830,10 +894,10 @@
           <div class="card-num">Servicio 02</div>
           <div class="card-title">Service Completo</div>
           <ul class="price-list">
-            <li><span class="price-name">Service básico</span><span class="price-dur">1h 30min</span><span class="price-val">$16.000</span></li>
-            <li><span class="price-name">Service completo</span><span class="price-dur">2h 30min</span><span class="price-val">$24.000</span></li>
-            <li><span class="price-name">Cambio de bujías</span><span class="price-dur">1 hora</span><span class="price-val">$7.000</span></li>
-            <li><span class="price-name">Regulación de motor</span><span class="price-dur">1h 30min</span><span class="price-val">$12.000</span></li>
+            <li><span class="price-name">Service básico</span><span class="price-dur">1h 30min</span><span class="price-val">$150.000</span></li>
+            <li><span class="price-name">Service completo</span><span class="price-dur">2h 30min</span><span class="price-val">$220.000</span></li>
+            <li><span class="price-name">Cambio de bujías</span><span class="price-dur">1 hora</span><span class="price-val">$65.000</span></li>
+            <li><span class="price-name">Regulación de motor</span><span class="price-dur">1h 30min</span><span class="price-val">$120.000</span></li>
           </ul>
         </div>
 
@@ -842,10 +906,10 @@
           <div class="card-num">Servicio 03</div>
           <div class="card-title">Frenos & Dirección</div>
           <ul class="price-list">
-            <li><span class="price-name">Revisión de frenos</span><span class="price-dur">45 min</span><span class="price-val">$8.000</span></li>
-            <li><span class="price-name">Pastillas de freno</span><span class="price-dur">1 hora</span><span class="price-val">$12.000</span></li>
-            <li><span class="price-name">Alineación</span><span class="price-dur">45 min</span><span class="price-val">$7.000</span></li>
-            <li><span class="price-name">Balanceo (4 ruedas)</span><span class="price-dur">45 min</span><span class="price-val">$6.000</span></li>
+            <li><span class="price-name">Revisión de frenos</span><span class="price-dur">45 min</span><span class="price-val">$75.000</span></li>
+            <li><span class="price-name">Pastillas de freno</span><span class="price-dur">1 hora</span><span class="price-val">$110.000</span></li>
+            <li><span class="price-name">Alineación</span><span class="price-dur">45 min</span><span class="price-val">$80.000</span></li>
+            <li><span class="price-name">Balanceo (4 ruedas)</span><span class="price-dur">45 min</span><span class="price-val">$70.000</span></li>
           </ul>
         </div>
 
@@ -861,10 +925,10 @@
           <div class="card-num">Servicio 01</div>
           <div class="card-title">Aceite & Filtros</div>
           <ul class="price-list">
-            <li><span class="price-name">Cambio de aceite</span><span class="price-dur">30 min</span><span class="price-val">$5.000</span></li>
-            <li><span class="price-name">Filtro de aceite</span><span class="price-dur">15 min</span><span class="price-val">$2.500</span></li>
-            <li><span class="price-name">Filtro de aire</span><span class="price-dur">15 min</span><span class="price-val">$2.000</span></li>
-            <li><span class="price-name">Filtro de combustible</span><span class="price-dur">15 min</span><span class="price-val">$2.500</span></li>
+            <li><span class="price-name">Cambio de aceite</span><span class="price-dur">30 min</span><span class="price-val">$45.000</span></li>
+            <li><span class="price-name">Filtro de aceite</span><span class="price-dur">15 min</span><span class="price-val">$18.000</span></li>
+            <li><span class="price-name">Filtro de aire</span><span class="price-dur">15 min</span><span class="price-val">$15.000</span></li>
+            <li><span class="price-name">Filtro de combustible</span><span class="price-dur">15 min</span><span class="price-val">$18.000</span></li>
           </ul>
         </div>
 
@@ -873,10 +937,10 @@
           <div class="card-num">Servicio 02</div>
           <div class="card-title">Service Completo</div>
           <ul class="price-list">
-            <li><span class="price-name">Service básico</span><span class="price-dur">1 hora</span><span class="price-val">$9.000</span></li>
-            <li><span class="price-name">Service completo</span><span class="price-dur">1h 30min</span><span class="price-val">$14.000</span></li>
-            <li><span class="price-name">Cambio de bujía</span><span class="price-dur">20 min</span><span class="price-val">$3.500</span></li>
-            <li><span class="price-name">Regulación de carburador</span><span class="price-dur">45 min</span><span class="price-val">$6.000</span></li>
+            <li><span class="price-name">Service básico</span><span class="price-dur">1 hora</span><span class="price-val">$90.000</span></li>
+            <li><span class="price-name">Service completo</span><span class="price-dur">1h 30min</span><span class="price-val">$140.000</span></li>
+            <li><span class="price-name">Cambio de bujía</span><span class="price-dur">20 min</span><span class="price-val">$28.000</span></li>
+            <li><span class="price-name">Regulación de carburador</span><span class="price-dur">45 min</span><span class="price-val">$55.000</span></li>
           </ul>
         </div>
 
@@ -885,10 +949,10 @@
           <div class="card-num">Servicio 03</div>
           <div class="card-title">Transmisión & Frenos</div>
           <ul class="price-list">
-            <li><span class="price-name">Ajuste y lubricación de cadena</span><span class="price-dur">20 min</span><span class="price-val">$3.000</span></li>
-            <li><span class="price-name">Cambio de cadena y piñones</span><span class="price-dur">1 hora</span><span class="price-val">$10.000</span></li>
-            <li><span class="price-name">Revisión de frenos</span><span class="price-dur">30 min</span><span class="price-val">$5.000</span></li>
-            <li><span class="price-name">Pastillas / zapatas</span><span class="price-dur">45 min</span><span class="price-val">$7.000</span></li>
+            <li><span class="price-name">Ajuste y lubricación de cadena</span><span class="price-dur">20 min</span><span class="price-val">$25.000</span></li>
+            <li><span class="price-name">Cambio de cadena y piñones</span><span class="price-dur">1 hora</span><span class="price-val">$95.000</span></li>
+            <li><span class="price-name">Revisión de frenos</span><span class="price-dur">30 min</span><span class="price-val">$40.000</span></li>
+            <li><span class="price-name">Pastillas / zapatas</span><span class="price-dur">45 min</span><span class="price-val">$65.000</span></li>
           </ul>
         </div>
 
@@ -896,6 +960,40 @@
     </div>
 
   </section>
+
+  <!-- GALLERY STRIP -->
+  <div class="gallery-strip">
+    <div class="gallery-item">
+      <img
+        src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=900&q=80"
+        alt="Mecánico trabajando en motor"
+        loading="lazy">
+      <div class="gallery-overlay">
+        <div class="gallery-label">Manos que saben</div>
+        <div class="gallery-sub">Mecánica de precisión</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img
+        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80"
+        alt="Auto en taller"
+        loading="lazy">
+      <div class="gallery-overlay">
+        <div class="gallery-label">Tu auto, en forma</div>
+        <div class="gallery-sub">Service integral</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80"
+        alt="Moto en taller"
+        loading="lazy">
+      <div class="gallery-overlay">
+        <div class="gallery-label">Motos a full</div>
+        <div class="gallery-sub">Cadena, frenos, motor</div>
+      </div>
+    </div>
+  </div>
 
   <!-- NITRO SECTION -->
   <section class="nitro-section" id="agendar">
@@ -980,44 +1078,44 @@ Sos directo, confiable, con onda y hablás en español argentino (vos, che, dale
 SERVICIOS PARA AUTOS:
 
 ACEITE Y FILTROS:
-- Cambio de aceite: $9.000 – 45 min
-- Filtro de aceite: $3.500 – 15 min
-- Filtro de aire: $3.000 – 15 min
-- Filtro de combustible: $4.000 – 20 min
+- Cambio de aceite: $90.000 – 45 min
+- Filtro de aceite: $28.000 – 15 min
+- Filtro de aire: $22.000 – 15 min
+- Filtro de combustible: $30.000 – 20 min
 
 SERVICE COMPLETO:
-- Service básico (aceite + filtros): $16.000 – 1h 30min
-- Service completo (básico + bujías + revisión general): $24.000 – 2h 30min
-- Cambio de bujías: $7.000 – 1 hora
-- Regulación de motor: $12.000 – 1h 30min
+- Service básico (aceite + filtros): $150.000 – 1h 30min
+- Service completo (básico + bujías + revisión general): $220.000 – 2h 30min
+- Cambio de bujías: $65.000 – 1 hora
+- Regulación de motor: $120.000 – 1h 30min
 
 FRENOS Y DIRECCIÓN:
-- Revisión de frenos: $8.000 – 45 min
-- Cambio de pastillas de freno: $12.000 – 1 hora
-- Alineación: $7.000 – 45 min
-- Balanceo (4 ruedas): $6.000 – 45 min
+- Revisión de frenos: $75.000 – 45 min
+- Cambio de pastillas de freno: $110.000 – 1 hora
+- Alineación: $80.000 – 45 min
+- Balanceo (4 ruedas): $70.000 – 45 min
 
 ---
 
 SERVICIOS PARA MOTOS:
 
 ACEITE Y FILTROS:
-- Cambio de aceite: $5.000 – 30 min
-- Filtro de aceite: $2.500 – 15 min
-- Filtro de aire: $2.000 – 15 min
-- Filtro de combustible: $2.500 – 15 min
+- Cambio de aceite: $45.000 – 30 min
+- Filtro de aceite: $18.000 – 15 min
+- Filtro de aire: $15.000 – 15 min
+- Filtro de combustible: $18.000 – 15 min
 
 SERVICE COMPLETO:
-- Service básico: $9.000 – 1 hora
-- Service completo: $14.000 – 1h 30min
-- Cambio de bujía: $3.500 – 20 min
-- Regulación de carburador: $6.000 – 45 min
+- Service básico: $90.000 – 1 hora
+- Service completo: $140.000 – 1h 30min
+- Cambio de bujía: $28.000 – 20 min
+- Regulación de carburador: $55.000 – 45 min
 
 TRANSMISIÓN Y FRENOS:
-- Ajuste y lubricación de cadena: $3.000 – 20 min
-- Cambio de cadena y piñones: $10.000 – 1 hora
-- Revisión de frenos: $5.000 – 30 min
-- Cambio de pastillas / zapatas: $7.000 – 45 min
+- Ajuste y lubricación de cadena: $25.000 – 20 min
+- Cambio de cadena y piñones: $95.000 – 1 hora
+- Revisión de frenos: $40.000 – 30 min
+- Cambio de pastillas / zapatas: $65.000 – 45 min
 
 ---
 
