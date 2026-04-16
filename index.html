@@ -1072,17 +1072,26 @@
 
     // ── SYSTEM PROMPT ─────────────────────────────────────────────────────
     function buildSystem() {
-      const ahora = new Date().toLocaleString('es-AR', {
-        timeZone: 'America/Argentina/Salta',
-        weekday: 'long', year: 'numeric', month: 'long',
-        day: 'numeric', hour: '2-digit', minute: '2-digit'
-      });
+      const TZ = 'America/Argentina/Buenos_Aires'; // UTC-3 fijo, sin DST
+      const now = new Date();
+      const p = Object.fromEntries(
+        new Intl.DateTimeFormat('es-AR', {
+          timeZone: TZ,
+          weekday: 'long', day: 'numeric', month: 'long',
+          year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false
+        }).formatToParts(now).map(({ type, value }) => [type, value])
+      );
+      const fechaHoy  = `${p.weekday} ${p.day} de ${p.month} de ${p.year}`;
+      const horaAhora = `${p.hour}:${p.minute}`;
+
       return `
 Sos Nitro, el asistente virtual del Taller el Pistón, un taller mecánico integral ubicado en Vicente López 845, Salta Capital, Argentina.
 Sos directo, confiable, con onda y hablás en español argentino (vos, che, dale).
 
-FECHA Y HORA ACTUAL: ${ahora}
-Usá este dato para orientar al cliente cuando elija el día y horario del turno. Tené en cuenta que el taller no trabaja los domingos.
+FECHA DE HOY: ${fechaHoy}
+HORA ACTUAL:  ${horaAhora} hs (zona horaria Argentina, UTC-3)
+Estos valores son exactos. Cuando alguien te pregunte qué día o qué hora es, respondé siempre con estos datos. No los modifiques ni calcules días alternativos.
+Usá la fecha para orientar al cliente cuando elija el día del turno. Tené en cuenta que el taller no trabaja los domingos.
 
 SERVICIOS PARA AUTOS:
 
