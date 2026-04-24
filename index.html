@@ -588,36 +588,10 @@
 
   <script>
     // ── SYSTEM PROMPT ─────────────────────────────────────────────────────
-<<<<<<< HEAD
     const SYSTEM = `
 Sos el Profesor MAX, una inteligencia artificial con conocimientos enciclopédicos en historia, ciencia, tecnología, inteligencia artificial, cultura general, matemáticas y geografía.
 
 Tu misión hoy es conducir un juego de preguntas y respuestas con alumnos de 17-18 años que están terminando la secundaria en Argentina. Esto ocurre en un seminario de inteligencia artificial donde los alumnos van a pasar de a uno a charlar con vos.
-=======
-    function buildSystem() {
-      const TZ = 'America/Argentina/Buenos_Aires'; // UTC-3 fijo, sin DST
-      const now = new Date();
-      const p = Object.fromEntries(
-        new Intl.DateTimeFormat('es-AR', {
-          timeZone: TZ,
-          weekday: 'long', day: 'numeric', month: 'long',
-          year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false
-        }).formatToParts(now).map(({ type, value }) => [type, value])
-      );
-      const fechaHoy  = `${p.weekday} ${p.day} de ${p.month} de ${p.year}`;
-      const horaAhora = `${p.hour}:${p.minute}`;
-
-      return `
-Sos Nitro, el asistente virtual del Taller el Pistón, un taller mecánico integral ubicado en Vicente López 845, Salta Capital, Argentina.
-Sos directo, confiable, con onda y hablás en español argentino (vos, che, dale).
-
-FECHA DE HOY: ${fechaHoy}
-HORA ACTUAL:  ${horaAhora} hs (zona horaria Argentina, UTC-3)
-Estos valores son exactos. Cuando alguien te pregunte qué día o qué hora es, respondé siempre con estos datos. No los modifiques ni calcules días alternativos.
-Usá la fecha para orientar al cliente cuando elija el día del turno. Tené en cuenta que el taller no trabaja los domingos.
-
-SERVICIOS PARA AUTOS:
->>>>>>> c0f349ae081e1c1f8fcfa2f20a598a252eb2627f
 
 TU PERSONALIDAD:
 - Sos carismático, energético y un poco dramático, como el conductor de un programa de preguntas.
@@ -643,7 +617,6 @@ TEMAS (rotá entre ellos, no repitas el mismo dos veces seguidas):
 - Tecnología y actualidad: redes sociales, inventos importantes, empresas tech, internet.
 - Cultura general: deportes, cine, música, Premios Nobel, Juegos Olímpicos.
 
-<<<<<<< HEAD
 REGLAS IMPORTANTES:
 - Respuestas CORTAS: máximo 3 oraciones.
 - UNA sola pregunta a la vez, esperá la respuesta antes de hacer la siguiente.
@@ -652,70 +625,7 @@ REGLAS IMPORTANTES:
 - Si el alumno dice algo gracioso o interesante, reaccioná con naturalidad.
 - Si alguien te pregunta qué sos, respondé que sos una IA construida con la API de Gemini de Google, diseñada para este seminario.
 - Recordá que hay un disertante mirando y otros alumnos esperando, así que sé dinámico y entretenido.
-=======
----
-
-SERVICIOS PARA MOTOS:
-
-ACEITE Y FILTROS:
-- Cambio de aceite: $45.000 – 30 min
-- Filtro de aceite: $18.000 – 15 min
-- Filtro de aire: $15.000 – 15 min
-- Filtro de combustible: $18.000 – 15 min
-
-SERVICE COMPLETO:
-- Service básico: $90.000 – 1 hora
-- Service completo: $140.000 – 1h 30min
-- Cambio de bujía: $28.000 – 20 min
-- Regulación de carburador: $55.000 – 45 min
-
-TRANSMISIÓN Y FRENOS:
-- Ajuste y lubricación de cadena: $25.000 – 20 min
-- Cambio de cadena y piñones: $95.000 – 1 hora
-- Revisión de frenos: $40.000 – 30 min
-- Cambio de pastillas / zapatas: $65.000 – 45 min
-
----
-
-HORARIOS: Lunes a Sábado de 9:00 a 18:00 hs.
-DIRECCIÓN: Vicente López 845, Salta Capital.
-RECORDATORIO: Una vez confirmado el turno, le llega un mensaje por WhatsApp.
-
-FLUJO DE AGENDADO:
-1. Saludar y presentarte como Nitro del Taller el Pistón.
-2. Preguntar si tiene auto o moto.
-3. Preguntar la marca y modelo del vehículo.
-4. Preguntar qué servicio necesita. Si tiene dudas, explicar brevemente las diferencias.
-5. Preguntar qué día y horario prefiere. Usá la fecha actual para sugerirle días concretos (ej: "¿te viene bien el jueves o el viernes?").
-6. Pedir su nombre y apellido completo.
-7. Pedir su número de celular para el recordatorio por WhatsApp.
-8. Verificá que tenés los 6 datos completos: nombre, celular, tipo de vehículo con marca y modelo, servicio elegido, fecha y hora. Si falta alguno, preguntalo antes de continuar. NUNCA llamés a agendar_turno si falta algún dato.
-9. Solo cuando tenés los 6 datos completos, llamá a agendar_turno. Esto es OBLIGATORIO antes de confirmar.
-10. Una vez ejecutada la función, confirmá el turno con entusiasmo y recordale la dirección del taller.
-
-CANCELACIÓN DE TURNO YA AGENDADO:
-- Si el cliente quiere cancelar un turno que ya tiene sacado, pedile su nombre y apellido y el vehículo.
-- Llamá a buscar_turno con esos datos.
-- Si no se encuentra ningún turno, informale cordialmente que no hay ningún turno registrado con esos datos.
-- Si se encuentra, confirmale los detalles (fecha, servicio) y preguntale: "¿Confirmás que querés cancelar ese turno?"
-- Solo si el cliente dice que sí quiere cancelar, llamá a cancelar_turno.
-- Una vez cancelado, informale que el turno fue eliminado y que puede sacar uno nuevo cuando quiera.
-- Si hay múltiples turnos para la misma persona, mencioná los detalles de cada uno y preguntale cuál quiere cancelar.
-
-ARREPENTIMIENTO DURANTE EL AGENDADO:
-- Si en cualquier momento durante el proceso de sacar un turno nuevo el cliente dice que se arrepiente o que no quiere seguir, NO llames a agendar_turno.
-- Respondé cordialmente: "¡Sin problema! Cuando quieras volver a sacar turno, acá estoy. ¡Que te vaya bien!"
-- No insistas ni preguntes el motivo.
-
-REGLAS:
-- Respuestas CORTAS: máximo 2 o 3 oraciones.
-- Hablá en texto corrido, sin listas ni asteriscos.
-- Sé natural y directo, no robótico.
-- SOLO respondés preguntas relacionadas con el taller, los servicios, los vehículos o el agendado de turnos. Si el cliente pregunta algo que no tiene nada que ver con el taller o los vehículos, respondé: "Perdón, no puedo ayudarte con eso. Mantengamos la charla en los servicios de tu vehículo, ¿dale?"
-- SIEMPRE usá agendar_turno cuando tengas todos los datos. NUNCA la llames si falta alguno.
->>>>>>> c0f349ae081e1c1f8fcfa2f20a598a252eb2627f
 `.trim();
-    }
 
     let ws = null;
     let audioCtxIn = null;
@@ -769,55 +679,7 @@ REGLAS:
                 }
               }
             },
-<<<<<<< HEAD
             system_instruction: { parts: [{ text: SYSTEM }] }
-=======
-            system_instruction: { parts: [{ text: buildSystem() }] },
-            tools: [{
-              function_declarations: [
-                {
-                  name: 'agendar_turno',
-                  description: 'Registra el turno en la agenda cuando el cliente confirma todos sus datos. OBLIGATORIO llamarla antes de confirmar el turno.',
-                  parameters: {
-                    type: 'OBJECT',
-                    properties: {
-                      nombre:     { type: 'STRING', description: 'Nombre y apellido completo del cliente' },
-                      celular:    { type: 'STRING', description: 'Número de celular con código de área' },
-                      vehiculo:   { type: 'STRING', description: 'Tipo, marca y modelo del vehículo. Ej: Auto Toyota Corolla, Moto Honda CB 250' },
-                      servicio:   { type: 'STRING', description: 'Servicio elegido con su precio. Ej: Service completo – $220.000' },
-                      fecha_hora: { type: 'STRING', description: 'Fecha y hora del turno. Ej: Martes 22/04 a las 10:00' }
-                    },
-                    required: ['nombre', 'celular', 'vehiculo', 'servicio', 'fecha_hora']
-                  }
-                },
-                {
-                  name: 'buscar_turno',
-                  description: 'Busca un turno existente por nombre del cliente y vehículo. Usá esta función antes de cancelar para verificar si el turno existe y mostrarle los detalles al cliente.',
-                  parameters: {
-                    type: 'OBJECT',
-                    properties: {
-                      nombre:   { type: 'STRING', description: 'Nombre y apellido del cliente' },
-                      vehiculo: { type: 'STRING', description: 'Tipo, marca y/o modelo del vehículo' }
-                    },
-                    required: ['nombre']
-                  }
-                },
-                {
-                  name: 'cancelar_turno',
-                  description: 'Elimina un turno de la agenda. Solo llamar después de que el cliente confirmó explícitamente que quiere cancelar.',
-                  parameters: {
-                    type: 'OBJECT',
-                    properties: {
-                      nombre:    { type: 'STRING', description: 'Nombre y apellido del cliente' },
-                      vehiculo:  { type: 'STRING', description: 'Tipo, marca y/o modelo del vehículo' },
-                      fecha_hora: { type: 'STRING', description: 'Fecha y hora del turno a cancelar, para identificarlo si hay varios' }
-                    },
-                    required: ['nombre']
-                  }
-                }
-              ]
-            }]
->>>>>>> c0f349ae081e1c1f8fcfa2f20a598a252eb2627f
           }
         }));
         setStatus('Esperando sesión…');
@@ -853,24 +715,6 @@ REGLAS:
           addBubble('user', msg.serverContent.inputTranscription.text);
         }
 
-<<<<<<< HEAD
-=======
-        if (msg.toolCall) {
-          for (const fc of msg.toolCall.functionCalls || []) {
-            if (fc.name === 'agendar_turno') {
-              console.log('agendar_turno:', fc.args);
-              agendarEnSheets(fc.id, fc.args);
-            } else if (fc.name === 'buscar_turno') {
-              console.log('buscar_turno:', fc.args);
-              buscarTurno(fc.id, fc.args);
-            } else if (fc.name === 'cancelar_turno') {
-              console.log('cancelar_turno:', fc.args);
-              cancelarTurno(fc.id, fc.args);
-            }
-          }
-        }
-
->>>>>>> c0f349ae081e1c1f8fcfa2f20a598a252eb2627f
         if (msg.serverContent?.turnComplete) {
           setState('listening'); setStatus('Te escucho…');
         }
@@ -991,94 +835,6 @@ REGLAS:
       o.className = 'prof-avatar';
       if (s !== 'idle') o.classList.add(s);
     }
-<<<<<<< HEAD
-=======
-
-    // ── AGENDAR EN GOOGLE SHEETS ───────────────────────────────────────────
-    async function agendarEnSheets(callId, args) {
-      let result = { success: true, message: 'Turno agendado correctamente' };
-      try {
-        const resp = await fetch('/api/sheets', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(args),
-        });
-        const data = await resp.json();
-        if (!resp.ok) result = { success: false, message: data.error || 'Error al agendar' };
-      } catch (e) {
-        console.error('Error enviando a sheets:', e);
-        result = { success: false, message: 'Error de conexión al agendar' };
-      }
-
-      if (ws && ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({
-          toolResponse: {
-            functionResponses: [{
-              id: callId,
-              name: 'agendar_turno',
-              response: result
-            }]
-          }
-        }));
-      }
-    }
-
-    // ── BUSCAR TURNO EN GOOGLE SHEETS ──────────────────────────────────────
-    async function buscarTurno(callId, args) {
-      let result;
-      try {
-        const resp = await fetch('/api/sheets-cancel', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'buscar', ...args }),
-        });
-        result = await resp.json();
-      } catch (e) {
-        console.error('Error buscando turno:', e);
-        result = { found: false, message: 'Error de conexión al buscar el turno' };
-      }
-
-      if (ws && ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({
-          toolResponse: {
-            functionResponses: [{
-              id: callId,
-              name: 'buscar_turno',
-              response: result
-            }]
-          }
-        }));
-      }
-    }
-
-    // ── CANCELAR TURNO EN GOOGLE SHEETS ───────────────────────────────────
-    async function cancelarTurno(callId, args) {
-      let result;
-      try {
-        const resp = await fetch('/api/sheets-cancel', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'cancelar', ...args }),
-        });
-        result = await resp.json();
-      } catch (e) {
-        console.error('Error cancelando turno:', e);
-        result = { success: false, message: 'Error de conexión al cancelar el turno' };
-      }
-
-      if (ws && ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify({
-          toolResponse: {
-            functionResponses: [{
-              id: callId,
-              name: 'cancelar_turno',
-              response: result
-            }]
-          }
-        }));
-      }
-    }
->>>>>>> c0f349ae081e1c1f8fcfa2f20a598a252eb2627f
   </script>
 </body>
 
